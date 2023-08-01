@@ -7,6 +7,17 @@ public class Apple {
         this.color = color;
     }
 
+    public Apple() {
+
+    }
+
+    public Apple(Integer integer) {
+    }
+
+    public Apple(String color) {
+
+    }
+
     public Integer getWeight() {
         return weight;
     }
@@ -29,4 +40,6 @@ public class Apple {
                 ", weight=" + weight +
                 '}';
     }
+
+
 }

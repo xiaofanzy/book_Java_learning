@@ -1,12 +1,10 @@
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 public class HashshellFuntion {
 
@@ -57,18 +55,39 @@ public class HashshellFuntion {
          * 2.指向任意实例类型的方法引用 String::length
          * 3. 指向现有对象的实例方法引用 expensiveTransaction::getValue
          */
+        List<String> str = Arrays.asList("a", "b");
+        str.sort(String::compareToIgnoreCase);
 
 
+        /**
+         * 构造函数的引用 我们可以使用lambda方法，使用new 参数生成一个新的对象
+         */
+        Supplier<Apple> c1 = Apple::new;
+        Apple apple = c1.get();
+        // 等价于
+        c1 = () -> new Apple();
 
+        List<Integer> weights = Arrays.asList(7, 3, 4, 10);
+        List<Apple> apples = map(weights,Apple::new);
 
+        /**
+         * 所谓Bi + ... 就是表示 多一个参数
+         */
 
-
-
-
-
+        //使用构造函数自己创建对象
 
     }
 
+    static Map<String,Function<Integer,Fruit>> map = new HashMap<>();
+
+    /*static {
+        map.put("apple",Apple::new);
+    }*/
+
+    // 使用string 和 integer来构建不同水果
+    public static Fruit giveMeFruit(String fruit,Integer weight){
+        return map.get(fruit.toUpperCase()).apply(weight);
+    }
 
     public static <T> List<T> filter(List<T> list, Predicate<T> p){
         List<T> result = new ArrayList<>();

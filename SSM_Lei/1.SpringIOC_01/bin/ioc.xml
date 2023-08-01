@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 1. 一个bean 注册一个组件
+	class：要注册组件的全类名
+	id : 这个组件的唯一标识
+	  -->
+	<bean class="com.atguigu.bean.Person" id="person01"> 
+		<!-- 使用property为标签为Person的对象属性赋值； -->
+		<property name="age" value="18"></property>
+		<property name="lastName" value="zhangsan"></property>
+		<property name="email" value="zhangsan@qq.com"></property>
+		<property name="gender" value="男"></property>
+	</bean>
+
+</beans>
