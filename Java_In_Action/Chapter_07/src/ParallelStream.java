@@ -1,3 +1,4 @@
+import java.util.concurrent.ForkJoinPool;
 import java.util.function.Function;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
@@ -92,6 +93,13 @@ public class ParallelStream {
         public void add(long value) {
             total += value;
         }
+    }
+
+    public static long forkJoinSum(long n){
+        long[] longs = LongStream.rangeClosed(1, n).toArray();
+        ForkJoinSumCalculator task = new ForkJoinSumCalculator(longs);
+        // 创建多个ForkJoinPool 没有作用，可以将实例保存在静态字段中，使之成为单例；
+        return new ForkJoinPool().invoke(task);
     }
 
 }
