@@ -1,22 +1,36 @@
-import java.util.Arrays;
-import java.util.Currency;
-import java.util.List;
+1. 19：00 159 上传介质
+2. 19：02 备份文件/depoy_ezs
+3. 19：03 停159服务
+4. 19：04 更新jar包
+5. 19：05 启动应用
 
-class test{
+1. 19：00 160 上传介质
+2. 19：05 备份文件/depoy_ezs
+3. 19：05 停160服务
+4. 19：06 更新jar包
 
-  public static List<Transaction> transactions = Arrays.asList( new Transaction(Currency.getInstance("EUR"),1500.0),
-            new Transaction(Currency.getInstance("USD"), 2300.0),
-            new Transaction(Currency.GBP, 9900.0),
-            new Transaction(Currency.EUR, 1100.0),
-            new Transaction(Currency.JPY, 7800.0),
-            new Transaction(Currency.CHF, 6700.0),
-            new Transaction(Currency.EUR, 5600.0),
-            new Transaction(Currency.USD, 4500.0),
-            new Transaction(Currency.CHF, 3400.0),
-            new Transaction(Currency.GBP, 3200.0),
-            new Transaction(Currency.USD, 4600.0),
-            new Transaction(Currency.JPY, 5700.0),
-            new Transaction(Currency.EUR, 6800.0) );
+1.19：29 上传介质
+2.19：30 备份文件/jarCopy/one_four_demo/20230803/
+3.19:31 停止75 服务
+4.19：32 更新jar包
+5.19：33 启动75服务
+
+1.19：35 上传介质
+2.19：40 备份文件/jarCopy/no_up
+3.19:31 停止76 服务
+4.19：32 更新jar包
+5.19：33 启动76服务
+
+1.21：02 上传介质
+2.21：03 备份文件/jarCopy/no_up
+3.21:04 停止77 服务
+4.21：05 更新jar包
+5.21：06 启动77服务
+
+1.21：30 上传介质
+2.21：33 备份文件/jarCopy/no_up
+3.21:34 停止78 服务
+4.21：35 更新jar包
+5.21：66 启动78服务
 
 
-}
