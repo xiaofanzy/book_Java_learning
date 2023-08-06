@@ -1,0 +1,59 @@
+package com.atguigu.test;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.util.SocketUtils;
+
+import com.atguigu.bean.Person;
+
+public class IOCTest {
+	
+	private ApplicationContext ioc = new ClassPathXmlApplicationContext("ioc.xml");
+
+	/**
+	 * 从容其中拿到这个组件
+	 * 
+	 * 存在问题： 1.所有源码包里面的东西都会合并放到类路径下；
+	 * 		  2. 如果没有创建bean的时候，会报这个错： org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'person02' is defined
+
+
+	 */
+
+	@Test
+	public void test() {
+		Person person = (Person) ioc.getBean("person01");
+		Person person1 = (Person) ioc.getBean("person01");
+		System.out.println(person == person1);
+		
+		//Person person2 = (Person) ioc.getBean("person02");
+
+	}
+	
+	
+	/**
+	 * 根据bean类型从ioc容器中获取
+	 * 当根据bean类型获取组件的时候，如果存在两个相同类型的组件，就会报错；
+	 * org.springframework.beans.factory.NoUniqueBeanDefinitionException: No qualifying bean of type [com.atguigu.bean.Person] is defined: expected single matching bean but found 2: person01,person02
+	
+	 */
+	@Test
+	public void test02() {
+		Person person = ioc.getBean("person02",Person.class);
+		System.out.println(person);
+		// 当存在两个的时候；报错；
+		
+	}
+	
+	@Test
+	public void test03(){
+		Person person = (Person)ioc.getBean("person03");
+		System.out.println(person);
+		
+		Person person1 = (Person)ioc.getBean("person05");
+		System.out.println(person1);
+	}
+
+}

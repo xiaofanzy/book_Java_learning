@@ -1,0 +1,13 @@
+package com.atguigu.dao;
+
+import com.atguigu.bean.User;
+
+public class UserDao extends BaseDao<User> {
+
+	@Override
+	public void save() {
+		System.out.println("用户保存成功");
+		
+	}
+
+}

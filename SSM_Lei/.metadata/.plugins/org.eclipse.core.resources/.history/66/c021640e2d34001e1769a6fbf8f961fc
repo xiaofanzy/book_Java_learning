@@ -1,0 +1,9 @@
+package com.atguigu.dao;
+
+public abstract class BaseDao<T> {
+	
+	public void save(){
+		System.out.println(BaseDao<T>  + " 保存");
+	}
+
+}

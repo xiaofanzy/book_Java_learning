@@ -1,0 +1,13 @@
+package com.atguigu.dao;
+
+import com.atguigu.bean.Book;
+
+public  class BookDao  extends BaseDao<Book>{
+
+	@Override
+	public void save() {
+		System.out.println("BookDao 保存");
+		
+	}
+
+}

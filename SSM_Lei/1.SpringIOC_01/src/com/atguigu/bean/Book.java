@@ -1,0 +1,41 @@
+package com.atguigu.bean;
+
+public class Book {
+	
+	private String bookName;
+	private String author;
+	public String getBookName() {
+		return bookName;
+	}
+	public void setBookName(String bookName) {
+		this.bookName = bookName;
+	}
+	public String getAuthor() {
+		return author;
+	}
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+	@Override
+	public String toString() {
+		return "Book [bookName=" + bookName + ", author=" + author + "]";
+	}
+	public Book(String bookName, String author) {
+		super();
+		this.bookName = bookName;
+		this.author = author;
+	}
+	public Book() {
+		super();
+	}
+	
+	public void myInit(){
+		System.out.println("book 对象被创建");
+	}
+	
+	public void myDestory(){
+		System.out.println("book 对象被销毁");
+	}
+	
+
+}

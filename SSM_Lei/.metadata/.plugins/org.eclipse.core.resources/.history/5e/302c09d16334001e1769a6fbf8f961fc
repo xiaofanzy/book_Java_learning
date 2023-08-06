@@ -1,0 +1,69 @@
+package com.atguigu.util;
+
+import java.lang.reflect.Method;
+import java.util.Arrays;
+
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.springframework.stereotype.Component;
+
+@Aspect
+@Component
+public class LogUtils {
+	
+	/**
+	 * 切入点表达式：
+	 * 固定格式: execution(访问权限夫 返回值类型 方法全类名（参数表）)
+	 * 
+	 * 通配符： 
+	 * 	* 
+	 * 		1.匹配一个或者多个字符：
+	 * 			execution(public int com.atguigu.impl.MyMathCalculator.*(int, int))
+	 * 		2. 匹配任意一个参数，
+	 * 			execution(public int com.atguigu.impl.MyMathCalculator.*(int, *))
+	 * 		3. 只能匹配一层路径
+	 * 		4. 权限位置 不能用*或者 .. 匹配
+	 * 
+	 *  ..  1。 匹配任意多个参数或者任意多个字符；
+	 *  		execution(public int com.atguigu.impl.MyMathCalculator.*(..))
+	 * 		2. 匹配任意多层路径
+	 * 
+	 *  && || ！
+	 *  	execution(public int com.atguigu.impl.MyMathCalculator.*(..)) && execution(public *.*(..))
+	 * 
+	 *  正常执行：
+	 *  	@Before(前置通知) -> @After(后置通知) -》 @AfterReturning
+	 *  异常执行：
+	 *  	@Before(前置通知) -> @After(后置通知) -》 @AfterThrowing
+	 *  
+	 *  
+	 *  再通知方法运行的时候，拿到方法的详细信息
+	 * 
+	 * 
+	 * 
+	 */
+	@Before("execution(public int com.atguigu.impl.MyMathCalculator.*(..))")
+	public static void getMethodBefore(){
+		System.out.println("");
+	}
+	
+	@AfterReturning("execution(public int com.atguigu.impl.MyMathCalculator.*(int, int))")
+	public static void getMethodAfter(Method method, Object... args){
+		System.out.println(method.getName() +" 方法正在使用调用结束，参数为" + Arrays.asList(args));
+	}
+	
+	@AfterThrowing("execution(public int com.atguigu.impl.MyMathCalculator.*(int, int))")
+	public static void getMethodError(Method method, Exception e){
+		System.out.println(method.getName() +" 方法正在使用异常，参数为" + e.getCause());
+	}
+	
+	@After("execution(public int com.atguigu.impl.MyMathCalculator.*(int, int))")
+	public static void getMethodFinally(Method method, Object... args){
+		System.out.println(method.getName() +" 方法正在使用最终，参数为" + Arrays.asList(args));
+	}
+	
+
+}

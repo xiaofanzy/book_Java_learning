@@ -1,0 +1,5 @@
+package com.atguigu.factory;
+
+public class AirPlaneInstanceFactory {
+
+}

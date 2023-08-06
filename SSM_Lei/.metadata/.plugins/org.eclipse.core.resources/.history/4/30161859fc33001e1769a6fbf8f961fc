@@ -1,0 +1,16 @@
+package com.atguigu.test;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class IOCTest {
+	
+	ApplicatonContext ioc = new ClassPathXmlApplicatonContext();
+
+	@Test
+	public void test() {
+		
+	}
+
+}

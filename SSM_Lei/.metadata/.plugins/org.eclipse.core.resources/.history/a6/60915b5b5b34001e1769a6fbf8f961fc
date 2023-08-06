@@ -1,0 +1,39 @@
+package com.atguigu.util;
+
+import java.lang.reflect.Method;
+import java.util.Arrays;
+
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.springframework.stereotype.Component;
+
+@Aspect
+@Component
+public class LogUtils {
+	
+	
+	@Before("execution(public int com.atguigu.impl.MyMathCalculator.*(int, int))")
+	public static void getMethodBefore(){
+		System.out.println(method.getName() +" 方法正在使用开始前，参数为" + Arrays.asList(args));
+	}
+	
+	@AfterReturning("execution(public int com.atguigu.impl.MyMathCalculator.*(int, int))")
+	public static void getMethodAfter(Method method, Object... args){
+		System.out.println(method.getName() +" 方法正在使用调用结束，参数为" + Arrays.asList(args));
+	}
+	
+	@AfterThrowing("execution(public int com.atguigu.impl.MyMathCalculator.*(int, int))")
+	public static void getMethodError(Method method, Exception e){
+		System.out.println(method.getName() +" 方法正在使用异常，参数为" + e.getCause());
+	}
+	
+	@After("execution(public int com.atguigu.impl.MyMathCalculator.*(int, int))")
+	public static void getMethodFinally(Method method, Object... args){
+		System.out.println(method.getName() +" 方法正在使用最终，参数为" + Arrays.asList(args));
+	}
+	
+
+}

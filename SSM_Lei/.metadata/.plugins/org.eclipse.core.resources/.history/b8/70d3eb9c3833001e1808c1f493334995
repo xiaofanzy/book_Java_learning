@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 原来的配置顺序是按照xml的先后顺序创建bean的，但是我们可以改变
+	
+	 -->
+	<bean class="com.atguigu.bean.Person" id="person"></bean>
+	<bean class="com.atguigu.bean.Car" id="car"></bean>
+
+</beans>

@@ -1,0 +1,16 @@
+package com.atguigu.service;
+
+import org.springframework.stereotype.Service;
+
+import com.atguigu.dao.BookDao;
+
+@Service
+public class BookService {
+	
+	private BookDao bookDao;
+
+	public void save() {
+		bookDao.saveBook();
+	}
+
+}

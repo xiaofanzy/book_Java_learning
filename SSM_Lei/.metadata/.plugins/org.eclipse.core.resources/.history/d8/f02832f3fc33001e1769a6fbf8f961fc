@@ -1,0 +1,13 @@
+package com.atguigu.dao;
+
+import org.springframework.stereotype.Repository;
+
+/**
+ * 给类加注解标签
+ * @author 凡是六一
+ *
+ */
+@Repository("bookdao")
+public class BookDao {
+
+}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<bean class="com.atguigu.bean.Car" id ="car01">
+		<property name="carName" value="baoma"></property>
+		<property name="color" value="绿色"></property>
+		<property name="price" value="30000"></property>
+	</bean>
+
+	<bean class="com.atguigu.bean.Person" id = "person01">
+		<property name="lastName">
+			<!-- property 内部进行复杂类型的赋值  -->
+			<null></null>
+		</property>
+	</bean>
+	
+</beans>

@@ -1,0 +1,9 @@
+package com.atguigu.factory;
+
+import org.springframework.beans.factory.FactoryBean;
+
+import com.atguigu.bean.Book;
+
+public class MyFactoryBeanImle implements FactoryBean<Book> {
+
+}

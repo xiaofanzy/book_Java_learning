@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+
+
+	<bean class="com.atguigu.bean.Car" id ="car01">
+		<property name="carName" value="baoma"></property>
+		<property name="color" value="绿色"></property>
+		<property name="price" value="30000"></property>
+	</bean>
+
+	<bean class="com.atguigu.bean.Book" id="book01" p:author="东游记"></bean>
+
+	<bean class="com.atguigu.bean.Person" id = "person01">
+		<property name="lastName">
+			<!-- property 内部进行复杂类型的赋值  -->
+			<null></null>
+		</property>
+		<!-- ref :引用外面的一个值 -->
+		<!-- 引用外部bean -->
+		<!-- <property name="car" ref="car01"></property> -->
+		<property name="car">
+			<!-- 引用内部bean -->
+			<bean class="com.atguigu.bean.Car">
+				<property name="carName" value="自行车"></property>
+			</bean>
+		</property>
+		
+		<!-- 如何为List赋值  -->
+		<property name="book">
+			<list>
+				<!-- 内部bean 只能内部使用，外部不能获取该组件 -->
+				<bean id="book00x" class="com.atguigu.bean.Book" p:author="西游记"></bean>
+				<!-- 引用外部bean -->
+				<ref bean="book01"/>
+			</list>
+		</property>
+		
+		<!-- maps -->
+		<property name="maps">
+			<map>
+				<entry key="key01" value="001"></entry>
+				<entry key="key02" value="质感"></entry>
+				<entry key="key03" value-ref="car01"></entry>
+				<entry key="key04">
+					<bean class="com.atguigu.bean.Book" p:author="zhangsan"></bean>
+				</entry>
+				<!-- <entry key="key05">
+					<map></map>
+				</entry> -->
+			</map>
+		</property>	
+		
+		
+		<!--props 类型赋值  -->	
+		<property name="properties">
+			<props>
+				<!-- kv 都是字符串，值直接卸载标签体中  -->
+				<prop key="username">root</prop>
+				<prop key="password">123456</prop>
+			</props>
+		</property>
+		
+	</bean>
+	
+	<!-- 使用until名称空间 -->
+	
+	
+</beans>

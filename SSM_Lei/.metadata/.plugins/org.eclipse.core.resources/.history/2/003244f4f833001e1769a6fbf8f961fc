@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<bean class="com.atguigu.bean.Car" id="car" p:carName="baoma"></bean>
+
+	<bean class="com.atguigu.bean.Book" id="book01" p:author="zhangsan"></bean>
+	<bean class="com.atguigu.bean.Book" id="book02" p:author="2"></bean>
+
+	<!-- 
+		spring 基于xml的自动装配
+		1. autowire="byName" 按照名字匹配  以属性名作为id去容器化找到这个组件，给它赋值，如果找不到就装配null
+			pricate Car car -> car = ioc.getBean("car"); 
+		2.autowire="byType"  根据类型匹配 
+			private Car car -> car = ioc.getBean(Car.class);
+			已属性的类型作为查找一句去容器中找到这个组件，如果容器中有多个组件则报错；
+		3.autowire="constructor" 根据构造器赋值
+			1）。先按照有参构造器的参数类型进行装配，成功则赋值，如果找不到就直接装配null;
+			2). 如果按照类型找到的多个，参数的名作为id继续匹配，找到就装配，找不到就null
+			3. 永远不会报错
+	
+	 -->
+
+	<bean class="com.atguigu.bean.Person" id = "person" autowire="constructor"></bean>
+
+
+	<!--SPEL  -->
+	<bean class="com.atguigu.bean.Person" id = "person1">
+		<!-- 字面量${}   #{} -->
+		<property name="age" value="#{1*12}"></property>
+		<property name="lastName" value="#{book01.author}"></property>
+		<property name="car" value="#{car}"></property>
+		<!-- 静态方法 -->
+		<property name="email" value="#{T(java.util.UUID).randomUUID().toString().substr(0,5)}"></property>
+		<property name="gender" value="#{book01.getAuthor()}"></property>
+	</bean>
+
+</beans>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+	<!-- 通过给bean添加某些注解，可以款苏的将bean加入到ioc容器中
+		某个类上添加任何一个注解都可以快速的将这个组件ioc容器中
+		
+		Spring 注解
+		@Controller  控制器 推荐给控制器servlet 包下的这些组件加入到注解中
+		@Service 业务逻辑， 推荐给逻辑层添加这个注解  
+		@Repository 给数据库层的组件添加这个注解
+		@Component 给不属于以上基层的组件添加这个注解
+		
+		注解可以随便加，spring底层不会去验证你的这个组件是否如你说所是一个dao层还是service层组件
+		加注解是为了给程序员看的的方便；
+		
+		使用注解的方式：
+		1.加入注解
+		2.加入自动扫描
+		3.导入sprong-aop包，为的就是支持注解扫描
+		
+		
+		组件的作用域，默认就是单例的；
+			@Scope(value = "propertype")
+	 -->
+	 <context:component-scan base-package="com.atguigu">
+	 	<!-- context:exclude-filter  扫描的时候排除一些不必要的组件 
+	 		1.type="annotation" 指定排除规则，按照注解进行排除，标注了指定注解的不要
+	 			expression： 注解的全类名
+	 		2. type="assignable"  指定扫描的某个具体的类，按照类排除
+	 			expression：类的全类名
+	 	
+	 	-->
+	 	<!-- <context:exclude-filter type="assignable" expression="org.springframework.stereotype.Controller"/> -->
+	 	
+	 	<!--  只扫描某些注解 -->  -->
+	 	<context:include-filter type="annotation" expression=""/>
+	 
+	 </context:component-scan>
+
+</beans>

@@ -1,0 +1,17 @@
+package com.atguigu.servlet;
+
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
+
+import com.atguigu.service.BookService;
+
+@Controller
+public class Bookservlet {
+	
+	private BookService bookService;
+	
+	public void getBook(){
+		bookService.save();
+	}
+
+}
