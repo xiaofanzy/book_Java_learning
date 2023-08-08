@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+
+	<!-- 开启基于注解的包扫描 -->
+	<context:component-scan base-package="com.atguigu"></context:component-scan>
+
+	<bean class="com.atguigu.util.LogUtils" id= "logUtils"></bean>
+	<!-- 开启面向切面的 -->
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	
+	<!-- 基于配置 -->
+	<aop:config>
+		<aop:pointcut expression="execution(public int com.atguigu.impl.MyMathCalculator.*(int, int))" id="globalPointCut"/>
+		<aop:aspect ref="logUtils">
+			<aop:before method="getMethodBefore" pointcut-ref="globalPointCut"></aop:before>
+			<aop:after-returning method="getMethodAfter" pointcut-ref="globalPointCut" returning="result"/>
+			<aop:after method="getMethodFinally" pointcut-ref="globalPointCut"/>
+		</aop:aspect>
+	</aop:config>
+</beans>

@@ -1,0 +1,3 @@
+jdbc.ursername=root
+jdbc.password=root
+jdbc.jdbcUrl=jdbc:mysql://localhost:3306/jdb

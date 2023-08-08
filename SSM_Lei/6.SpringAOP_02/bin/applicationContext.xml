@@ -10,6 +10,20 @@
 	<!-- 开启基于注解的包扫描 -->
 	<context:component-scan base-package="com.atguigu"></context:component-scan>
 
+	<bean class="com.atguigu.util.LogUtils" id= "logUtils"></bean>
 	<!-- 开启面向切面的 -->
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	
+	<!-- 基于配置 -->
+	<!-- 不重要的用注解，重要的用配置 -->
+	<aop:config>
+		<aop:pointcut expression="execution(public int com.atguigu.impl.MyMathCalculator.*(int, int))" id="globalPointCut"/>
+		<aop:aspect ref="logUtils">
+			<aop:before method="getMethodBefore" pointcut-ref="globalPointCut"></aop:before>
+			<aop:after-returning method="getMethodAfter" pointcut-ref="globalPointCut" returning="result"/>
+			<aop:after method="getMethodFinally" pointcut-ref="globalPointCut"/>
+			<aop:after-throwing method="getMethodError" pointcut-ref="globalPointCut" throwing="exception"/>
+			<aop:around method="getRound" pointcut-ref="globalPointCut"/>
+		</aop:aspect>
+	</aop:config>
 </beans>

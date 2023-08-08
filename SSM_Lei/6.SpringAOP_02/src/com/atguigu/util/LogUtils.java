@@ -4,15 +4,18 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 @Aspect
-@Component
+//@Component
 public class LogUtils {
 	
 	/**
@@ -44,26 +47,65 @@ public class LogUtils {
 	 *  再通知方法运行的时候，拿到方法的详细信息
 	 * 
 	 * 
+	 * 抽取可重用的切入点表达式：
+	 * 1. 声明一个没有实现的void空方法；
+	 * 2. 给方法标注上@PointCut注解
+	 * 
 	 * 
 	 */
-	@Before("execution(public int com.atguigu.impl.MyMathCalculator.*(int, int))")
-	public static void getMethodBefore(){
-		System.out.println("1");
+	
+	@Pointcut("execution(public int com.atguigu.impl.MyMathCalculator.*(int, int))")
+	public void getPointCut(){}
+	
+	//@Before("getPointCut()")
+	public static void getMethodBefore(JoinPoint joinPoint){
+		Object[] args = joinPoint.getArgs();
+		String name = joinPoint.getSignature().getName();
+		System.out.println( name + " 方法正在执行，参数为 + " + Arrays.asList(args));
 	}
 	
-	@AfterReturning("execution(public int com.atguigu.impl.MyMathCalculator.*(..))")
-	public static void getMethodAfter(JoinPoint joinpoint){
-		System.out.println(joinpoint.getSignature().getName() +" 方法正在使用调用结束，参数为");
+	/**
+	 * returning 告诉spring 哪个方法接口返回值
+	 * @param joinpoint
+	 * @param result
+	 */
+	@AfterReturning(value = "execution(public int com.atguigu.impl.MyMathCalculator.*(..))",returning = "result")
+	public static void getMethodAfter(JoinPoint joinpoint,Object result){
+		System.out.println(joinpoint.getSignature().getName() +" 方法正在使用调用结束，参数为" + result);
 	}
 	
-	@AfterThrowing("execution(public int com.atguigu.impl.MyMathCalculator.*(..))")
-	public static void getMethodError(JoinPoint joinpoint){
-		System.out.println(joinpoint.getSignature().getName() +" 方法正在使用异常，参数为");
+	/**
+	 * throwing 告诉spring异常返回信息
+	 * @param joinpoint
+	 * @param exception
+	 */
+	@AfterThrowing(value = "execution(public int com.atguigu.impl.MyMathCalculator.*(..))",throwing = "exception")
+	public static void getMethodError(JoinPoint joinpoint,Exception exception){
+		System.out.println(joinpoint.getSignature().getName() +" 方法正在使用异常，参数为" + exception.getCause());
 	}
 	
 	@After("execution(public int com.atguigu.impl.MyMathCalculator.*(..))")
 	public static void getMethodFinally(JoinPoint joinpoint){
 		System.out.println(joinpoint.getSignature().getName() +" 方法正在使用异常，参数为");
+	}
+	
+	@Around(value = "getPointCut()")
+	public Object getRound(ProceedingJoinPoint ejp){
+		Object proceed = null;
+		try {
+			Object[] args = ejp.getArgs();
+			String name = ejp.getSignature().getName();
+			System.out.println(name + "前置通知");
+			proceed = ejp.proceed(ejp.getArgs());
+			System.out.println(name + " 方法执行结束");
+		} catch (Throwable e) {
+			System.out.println("异常为" + e.getCause());
+			e.printStackTrace();
+		}finally{
+			System.out.println(" 方法执行结束 " + ejp.getSignature().getName());
+		}
+		
+		return proceed;
 	}
 	
 

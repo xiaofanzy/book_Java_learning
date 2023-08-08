@@ -22,7 +22,7 @@ public class AOPTest {
 		 */
 		MyMathCalculator bean = ioc.getBean(MyMathCalculator.class);
 		bean.add(1, 2);
-		 
+		
 	}
 
 }

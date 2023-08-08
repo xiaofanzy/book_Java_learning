@@ -1,0 +1,25 @@
+package com.atguigu.test;
+
+import static org.junit.Assert.*;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import javax.sql.DataSource;
+
+import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class TxTest {
+	
+	ApplicationContext ioc = new ClassPathXmlApplicationContext("applicationContext.xml");
+
+	@Test
+	public void test() throws SQLException {
+		DataSource bean = (DataSource)ioc.getBean("dataSource");
+		System.out.println(bean.getConnection());
+		
+	}
+
+}

@@ -1,0 +1,19 @@
+package com.atguigu.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.atguigu.Dao.BookDao;
+
+public class BookService {
+	
+	
+	@Autowired
+	private BookDao bookDao;
+	
+	public void checkout(String bookName,String userName){
+		String isbn = bookDao.getIsbn(bookName);
+		bookDao.updateBook(isbn);
+		bookDao.updateBalance(userName, 1);
+	}
+
+}
